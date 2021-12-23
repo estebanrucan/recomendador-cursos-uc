@@ -1,6 +1,6 @@
-# Título del Proyecto
+# Recomendador de Cursos UC
 
-_Acá va un párrafo que describa lo que es el proyecto_
+Recomendador realizado para que los estudiantes tengan acceso a recomendaciones en base a los programas de los cursos de la Pontificia Universidad Católica de Chile
 
 ## Comenzando 🚀
 
@@ -14,7 +14,11 @@ Mira **Deployment** para conocer como desplegar el proyecto.
 _Que cosas necesitas para instalar el software y como instalarlas_
 
 ```
-Da un ejemplo
+scrapy
+pandas
+numpy
+streamlit
+gensim
 ```
 
 ### Instalación 🔧
@@ -63,8 +67,8 @@ _Agrega notas adicionales sobre como hacer deploy_
 
 _Menciona las herramientas que utilizaste para crear tu proyecto_
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-* [Maven](https://maven.apache.org/) - Manejador de dependencias
+* [Scrapy](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
+* [Streamlit](https://maven.apache.org/) - Manejador de dependencias
 * [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
 
 ## Contribuyendo 🖇️
@@ -83,14 +87,13 @@ Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones
 
 _Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
 
-* **Andrés Villanueva** - *Trabajo Inicial* - [villanuevand](https://github.com/villanuevand)
-* **Fulanito Detal** - *Documentación* - [fulanitodetal](#fulanito-de-tal)
+* **Esteban Rucán** - *Trabajo Inicial* - [estebanrucan](https://github.com/estebanrucan)
 
-También puedes mirar la lista de todos los [contribuyentes](https://github.com/your/project/contributors) quíenes han participado en este proyecto. 
+También puedes mirar la lista de todos los [contribuyentes](https://github.com/estebanrucan/recomendador-cursos-uc/contributors) quíenes han participado en este proyecto. 
 
 ## Licencia 📄
 
-Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
+Este proyecto está bajo la Licencia MIT - mira el archivo [LICENSE.md](LICENSE.md) para detalles
 
 ## Expresiones de Gratitud 🎁
 
