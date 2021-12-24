@@ -8,6 +8,8 @@ import json
 import urllib.request
 import plotly.express as px
 from nltk import word_tokenize
+import nltk
+nltk.download('punkt')
 
 # LOADS
 
