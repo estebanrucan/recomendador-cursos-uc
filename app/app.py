@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import gensim
 import json
+import urllib.request
 import plotly.express as px
 from nltk import word_tokenize
 
@@ -12,20 +13,20 @@ from nltk import word_tokenize
 
 ## Menus
 
-with open("../scraper_siglas-uc/outputs/menus.json", "r") as archivo:
-    menus = json.load(archivo)
+with urllib.request.urlopen("https://raw.githubusercontent.com/estebanrucan/recomendador-cursos-uc/main/scraper_siglas-uc/outputs/menus.json") as url:
+    menus = json.load(url)
 
 ## Data
 
-data     = pd.read_json("../scraper_siglas-uc/outputs/programas_clean.json", orient = "table")
-detalles = pd.read_json("../scraper_siglas-uc/outputs/detalles_sp.json", orient = "table")
+data     = pd.read_json("https://raw.githubusercontent.com/estebanrucan/recomendador-cursos-uc/main/scraper_siglas-uc/outputs/programas_clean.json", orient = "table")
+detalles = pd.read_json("https://raw.githubusercontent.com/estebanrucan/recomendador-cursos-uc/main/scraper_siglas-uc/outputs/detalles_sp.json", orient = "table")
 
 ## Model
 
-model       = gensim.models.LsiModel.load("../modelo/files/model.model")
-index       = gensim.similarities.MatrixSimilarity.load("../modelo/files/index.index")
-diccionario = gensim.corpora.Dictionary.load("../modelo/files/diccionario.dict")
-stopwords   = pd.read_pickle("../modelo/files/stopwords.pkl")
+model       = gensim.models.LsiModel.load("https://github.com/estebanrucan/recomendador-cursos-uc/raw/main/modelo/files/model.model")
+index       = gensim.similarities.MatrixSimilarity.load("https://github.com/estebanrucan/recomendador-cursos-uc/blob/main/modelo/files/index.index?raw=true")
+diccionario = gensim.corpora.Dictionary.load("https://github.com/estebanrucan/recomendador-cursos-uc/blob/main/modelo/files/diccionario.dict?raw=true")
+stopwords   = pd.read_pickle("https://github.com/estebanrucan/recomendador-cursos-uc/blob/main/modelo/files/stopwords.pkl?raw=true")
 tilde, sint = 'áéíóúÁÉÍÓÚ','aeiouAEIOU'
 trans       = str.maketrans(tilde, sint)
 
