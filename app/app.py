@@ -133,7 +133,7 @@ elif data_show["Similitud"].unique().shape[0] == 1:
     No hay visualizaciones para mostrar.
     """)
 else:
-    data_media = datos_consulta.iloc[:20, :].groupby(["Escuela"]).agg({"Similitud": "mean"}).sort_values("Similitud", ascending=False)
+    data_media = datos_consulta.iloc[:top_n, :].groupby(["Escuela"]).agg({"Similitud": "mean"}).sort_values("Similitud", ascending=False)
     fig = px.bar(
         data_media,
         labels = {"value": "Porcentaje (%)"},
@@ -141,4 +141,3 @@ else:
     )
     fig.update_layout(showlegend = False)
     st.plotly_chart(fig)
-
