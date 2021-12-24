@@ -61,7 +61,7 @@ datos_consulta = detalles.\
     merge(data, how = "right", on = ["escuela", "sigla"]).\
     sort_values("score", ascending = False).\
     iloc[:, [-1] + [0, 1, 2, 3, 4, 5]].\
-    assign(score = lambda x: 100 * (0.5 * x.score + 0.5)).\
+    assign(score = lambda x: 100 * x.score).\
     rename({
         "score": "Similitud", 
         "escuela": "Escuela", 
