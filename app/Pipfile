@@ -8,6 +8,10 @@ streamlit = "*"
 pandas = "*"
 numpy = "*"
 gensim = "*"
+autopep8 = "*"
+nltk = "*"
+seaborn = "*"
+plotly = "*"
 
 [dev-packages]
 
