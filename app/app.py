@@ -38,6 +38,8 @@ trans       = str.maketrans(tilde, sint)
 st.title("Recomendador de Cursos UC")
 
 st.markdown("""
+#### Hecho por Esteban Rucán.
+
 Esta aplicación entrega recomendaciones en base a la similitud de la consulta ingresada y los programas disponibles en el [Catálogo UC](https://catalogo.uc.cl/). Actualizado al Primer Semestre de 2022.
 """)
 
@@ -55,26 +57,25 @@ consulta = word_tokenize(consulta)
 consulta = [palabra.lower() for palabra in consulta if palabra.isalpha()]
 consulta = [palabra for palabra in consulta if palabra not in stopwords]
 
-consulta_bow = diccionario.doc2bow(consulta)
-data["score"] = index[model[consulta_bow]]
+consulta_bow   = diccionario.doc2bow(consulta)
+data["score"]  = index[model[consulta_bow]]
 datos_consulta = detalles.\
     merge(data, how = "right", on = ["escuela", "sigla"]).\
     sort_values("score", ascending = False).\
     iloc[:, [-1] + [0, 1, 2, 3, 4, 5]].\
     assign(score = lambda x: 100 * x.score).\
     rename({
-        "score": "Similitud", 
-        "escuela": "Escuela", 
-        "campus": "Campus", 
-        "formato": "Formato", 
-        "sigla": "Sigla",
-        "nombre": "Nombre",
+        "score"   : "Similitud",
+        "escuela" : "Escuela",
+        "campus"  : "Campus",
+        "formato" : "Formato",
+        "sigla"   : "Sigla",
+        "nombre"  : "Nombre",
         "creditos": "Créditos"
     }, axis = 1).\
     iloc[:, [0, 4, 5, 1, 2, 3, 6]].\
     assign(pos = np.arange(1, 1080, 1)).\
     set_index("pos")
-
 
 ## Filtros
 
@@ -89,11 +90,9 @@ top_n    = st.sidebar.slider("Top Recomendaciones", 4, 30, 10, 2)
 
 st.header("Recomendaciones")
 
-data_show = datos_consulta.\
-    iloc[:top_n, :]
+data_show = datos_consulta.iloc[:top_n, :]
 
 data_show["Similitud"] = np.round(data_show["Similitud"], 1).astype(str) + "%"
-
 
 ## Recomendaciones
 
@@ -136,11 +135,14 @@ elif data_show["Similitud"].unique().shape[0] == 1:
     No hay visualizaciones para mostrar.
     """)
 else:
-    data_media = datos_consulta.iloc[:top_n, :].groupby(["Escuela"]).agg({"Similitud": "mean"}).sort_values("Similitud", ascending=False)
+    data_media = datos_consulta.iloc[:top_n, :].\
+        groupby(["Escuela"]).\
+        agg({"Similitud": "mean"}).\
+        sort_values("Similitud", ascending=False)
     fig = px.bar(
         data_media,
         labels = {"value": "Porcentaje (%)"},
-        title = "Media de Similitud por Escuela"
+        title  = "Media de Similitud por Escuela"
     )
     fig.update_layout(showlegend = False)
     st.plotly_chart(fig)
