@@ -25,14 +25,6 @@ python=3.8
 * [Scrapy](https://docs.scrapy.org/) - Web Scraping
 * [Streamlit](https://docs.streamlit.io/) - Desarollo de apps con datos.
 
-## Contribuyendo 🖇️
-
-Por favor lee el [CONTRIBUTING.md](https://gist.github.com/villanuevand/xxxxxx) para detalles de nuestro código de conducta, y el proceso para enviarnos pull requests.
-
-## Wiki 📖
-
-Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/tu/proyecto/wiki)
-
 ## Versionado 📌
 
 Para todas las versiones disponibles, mira los [tags en este repositorio](https://github.com/estebanrucan/recomendador-cursos-uc/tags).
@@ -43,7 +35,7 @@ Para todas las versiones disponibles, mira los [tags en este repositorio](https:
 
 ## Licencia 📄
 
-Este proyecto está bajo la Licencia MIT - mira el archivo [LICENSE.md](LICENSE.md) para detalles
+Este proyecto está bajo la Licencia MIT - mira el archivo [LICENSE.md](https://github.com/estebanrucan/recomendador-cursos-uc/blob/main/LICENCE.md) para detalles
 
 ## Expresiones de Gratitud 🎁
 
