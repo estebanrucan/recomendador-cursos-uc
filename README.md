@@ -3,8 +3,9 @@
 # Recomendador de Cursos UC
 
 <p align="center">
-<img src="https://img.shields.io/github/license/estebanrucan/recomendador-cursos-uc?style=plastic"/>
-<img src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Festebanrucan%2Frecomendador-cursos-uc"/>
+  <img src="https://img.shields.io/github/license/estebanrucan/recomendador-cursos-uc?style=plastic"/>
+  <img src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Festebanrucan%2Frecomendador-cursos-uc"/>
+  <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"/>
 </p>
 
 ## Descripción
