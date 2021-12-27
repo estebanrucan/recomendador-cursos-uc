@@ -3,9 +3,15 @@
 # Recomendador de Cursos UC
 
 <p align="center">
-  <img src="https://img.shields.io/github/license/estebanrucan/recomendador-cursos-uc?style=plastic"/>
-  <img src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Festebanrucan%2Frecomendador-cursos-uc"/>
-  <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"/>
+  <a href="https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge">
+    <img src="https://img.shields.io/github/license/estebanrucan/recomendador-cursos-uc?style=plastic"/>
+  </a>
+  <a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Festebanrucan%2Frecomendador-cursos-uc">
+    <img src="https://img.shields.io/badge/Tweet-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white"/>
+  </a>
+  <a href="https://docs.python.org/">
+    <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"/>
+  </a>
 </p>
 
 ## Descripción
