@@ -134,7 +134,7 @@ if len(consulta) == 0:
     """)
 elif data_show["Similitud"].unique().shape[0] == 1:
     st.markdown("""
-    No hay visualizaciones para mostrar.
+    No hay visualizaciones para mostrar. Intenta con una nueva consulta o utiliza sinónimos.
     """)
 else:
     data_media = datos_consulta.iloc[:top_n, :].\
