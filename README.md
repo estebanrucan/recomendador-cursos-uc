@@ -1,4 +1,12 @@
+
+
 # Recomendador de Cursos UC
+
+<center> 
+https://img.shields.io/github/license/estebanrucan/recomendador-cursos-uc?style=plastic
+</center>
+
+## Descripción
 
 Recomendador realizado para que los estudiantes tengan acceso a recomendaciones en base a los programas de los cursos de la Pontificia Universidad Católica de Chile.
 
