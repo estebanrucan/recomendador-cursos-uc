@@ -3,7 +3,7 @@
 # Recomendador de Cursos UC
 
 <center> 
-https://img.shields.io/github/license/estebanrucan/recomendador-cursos-uc?style=plastic
+![](https://img.shields.io/github/license/estebanrucan/recomendador-cursos-uc?style=plastic)
 </center>
 
 ## Descripción
