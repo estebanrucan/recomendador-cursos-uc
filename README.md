@@ -9,15 +9,15 @@ Visita la app desde este [link](https://share.streamlit.io/estebanrucan/recomend
 ### Pre-requisitos 📋
 
 ```
-scrapy
-selenium
-nltk
-gensim
-pandas
-numpy
-streamlit
-plotly
-python=3.8
+scrapy==2.4.1
+selenium==3.141.0
+nltk==3.6.6
+gensim==4.1.2
+pandas==1.3.5
+numpy==1.21.5
+streamlit==1.3.0
+plotly==5.5.0
+python==3.8
 ```
 
 ## Construido con 🛠️
@@ -31,7 +31,7 @@ Para todas las versiones disponibles, mira los [tags en este repositorio](https:
 
 ## Autores ✒️
 
-* **Esteban Rucán** - *Trabajo Inicial* - [estebanrucan](https://github.com/estebanrucan)
+* **Esteban Rucán** - [estebanrucan](https://github.com/estebanrucan)
 
 ## Licencia 📄
 
