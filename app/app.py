@@ -1,44 +1,52 @@
 # DEPENDENCIES
 
+
 import streamlit as st
 import numpy as np
 import pandas as pd
 import gensim
 import json
-import urllib.request
+import codecs
 import plotly.express as px
-from nltk import word_tokenize
+
 import nltk
-nltk.download('punkt')
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
+
+
+
+import os
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 # LOADS
 
 ## Menus
 
-with urllib.request.urlopen("https://raw.githubusercontent.com/estebanrucan/recomendador-cursos-uc/main/scraper_siglas-uc/outputs/menus.json") as url:
-    menus = json.load(url)
+with codecs.open("../scraper_siglas-uc/outputs/menus.json", "rU", encoding = "utf-8") as archivo:
+    menus = json.load(archivo)
 
 ## Data
 
-data     = pd.read_json("https://raw.githubusercontent.com/estebanrucan/recomendador-cursos-uc/main/scraper_siglas-uc/outputs/programas_clean.json", orient = "table")
-detalles = pd.read_json("https://raw.githubusercontent.com/estebanrucan/recomendador-cursos-uc/main/scraper_siglas-uc/outputs/detalles_sp.json", orient = "table")
+data     = pd.read_json("../scraper_siglas-uc/outputs/programas_clean.json", orient = "table")
+detalles = pd.read_json("../scraper_siglas-uc/outputs/detalles_sp.json", orient = "table")
 
 ## Model
 
-model       = gensim.models.LsiModel.load("https://github.com/estebanrucan/recomendador-cursos-uc/raw/main/modelo/files/model.model")
-index       = gensim.similarities.MatrixSimilarity.load("https://github.com/estebanrucan/recomendador-cursos-uc/blob/main/modelo/files/index.index?raw=true")
-diccionario = gensim.corpora.Dictionary.load("https://github.com/estebanrucan/recomendador-cursos-uc/blob/main/modelo/files/diccionario.dict?raw=true")
-stopwords   = pd.read_pickle("https://github.com/estebanrucan/recomendador-cursos-uc/blob/main/modelo/files/stopwords.pkl?raw=true")
+model       = gensim.models.LsiModel.load("../modelo/files/model.model")
+index       = gensim.similarities.MatrixSimilarity.load("../modelo/files/index.index")
+diccionario = gensim.corpora.Dictionary.load("../modelo/files/diccionario.dict")
+stopwords   = pd.read_pickle("../modelo/files/stopwords.pkl")
 tilde, sint = 'áéíóúÁÉÍÓÚ','aeiouAEIOU'
 trans       = str.maketrans(tilde, sint)
-
 
 # MAIN TITLE
 
 st.title("Recomendador de Cursos UC")
 
 st.markdown("""
-#### Hecho por Esteban Rucán.
+*Hecho por Esteban Rucán*.
 
 Esta aplicación entrega recomendaciones en base a la similitud de la consulta ingresada y los programas disponibles en el [Catálogo UC](https://catalogo.uc.cl/). Actualizado al Primer Semestre de 2022.
 """)
@@ -53,7 +61,7 @@ st.sidebar.markdown("## Consulta")
 
 consulta = st.sidebar.text_area(label = "", placeholder = "Por ejemplo: Portafolios de inversión")
 consulta = consulta.translate(trans)
-consulta = word_tokenize(consulta)
+consulta = nltk.word_tokenize(consulta)
 consulta = [palabra.lower() for palabra in consulta if palabra.isalpha()]
 consulta = [palabra for palabra in consulta if palabra not in stopwords]
 
@@ -91,7 +99,6 @@ top_n    = st.sidebar.slider("Top Recomendaciones", 4, 30, 10, 2)
 st.header("Recomendaciones")
 
 data_show = datos_consulta.iloc[:top_n, :]
-
 data_show["Similitud"] = np.round(data_show["Similitud"], 1).astype(str) + "%"
 
 ## Recomendaciones
