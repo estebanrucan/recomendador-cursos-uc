@@ -3,7 +3,7 @@
 # Recomendador de Cursos UC
 
 <p align="center">
-  <a href="https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge">
+  <a href="./LICENCE.md">
     <img src="https://img.shields.io/github/license/estebanrucan/recomendador-cursos-uc?style=plastic"/>
   </a>
   <a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Festebanrucan%2Frecomendador-cursos-uc">
