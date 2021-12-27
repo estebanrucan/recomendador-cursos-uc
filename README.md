@@ -2,7 +2,9 @@
 
 # Recomendador de Cursos UC
 
-<img src="https://img.shields.io/github/license/estebanrucan/recomendador-cursos-uc?style=plastic" styles="align: center;">
+<p align="center">
+<img src="https://img.shields.io/github/license/estebanrucan/recomendador-cursos-uc?style=plastic"/>
+</p>
 
 ## Descripción
 
