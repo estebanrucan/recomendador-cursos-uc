@@ -28,10 +28,10 @@ detalles = pd.read_json("../scraper_siglas-uc/outputs/detalles_sp.json", orient 
 
 ## Model
 
-model       = gensim.models.LsiModel.load(".modelo/files/model.model")
-index       = gensim.similarities.MatrixSimilarity.load(".modelo/files/index.index")
-diccionario = gensim.corpora.Dictionary.load(".modelo/files/diccionario.dict")
-stopwords   = pd.read_pickle(".modelo/files/stopwords.pkl")
+model       = gensim.models.LsiModel.load("../modelo/files/model.model")
+index       = gensim.similarities.MatrixSimilarity.load("../modelo/files/index.index")
+diccionario = gensim.corpora.Dictionary.load("../modelo/files/diccionario.dict")
+stopwords   = pd.read_pickle("../modelo/files/stopwords.pkl")
 tilde, sint = 'áéíóúÁÉÍÓÚ','aeiouAEIOU'
 trans       = str.maketrans(tilde, sint)
 
@@ -76,7 +76,7 @@ datos_consulta = detalles.\
         "creditos": "Créditos"
     }, axis = 1).\
     iloc[:, [0, 4, 5, 1, 2, 3, 6]].\
-    assign(pos = np.arange(1, 1080, 1)).\
+    assign(pos = np.arange(1, 3229, 1)).\
     set_index("pos")
 
 ## Filtros
