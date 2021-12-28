@@ -25,10 +25,10 @@ trans       = str.maketrans(tilde, sint)
 
 @st.cache(allow_output_mutation=True)
 def data():
-    with codecs.open("../scraper_siglas-uc/outputs/menus.json", "rU", encoding = "utf-8") as archivo:
+    with codecs.open("scraper_siglas-uc/outputs/menus.json", "rU", encoding = "utf-8") as archivo:
         menus = json.load(archivo)
 
-    model    = SentenceTransformer("modelo/files/bert_model")
+    model    = SentenceTransformer("bert-base-nli-mean-tokens")
     embds    = torch.load("modelo/files/bert_de.tensor")
     data     = pd.read_json("scraper_siglas-uc/outputs/programas_clean.json", orient = "table")
     detalles = pd.read_json("scraper_siglas-uc/outputs/detalles_sp.json", orient = "table")
@@ -78,7 +78,7 @@ datos_consulta = detalles.\
         "creditos": "Créditos"
     }, axis = 1).\
     iloc[:, [0, 4, 5, 1, 2, 3, 6]].\
-    assign(pos = np.arange(1, 3229, 1)).\
+    assign(pos = np.arange(1, 3229)).\
     set_index("pos")
 
 ## Filtros

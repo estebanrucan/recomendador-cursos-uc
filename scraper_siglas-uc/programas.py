@@ -17,11 +17,10 @@ del_upper   = del_noalpha.apply(lambda lista: [palabra for palabra in lista if n
 tolower     = del_upper.apply(lambda lista: [palabra.lower() for palabra in lista if palabra.isalpha()])
 del_num     = tolower.apply(lambda lista: [palabra.strip("0123456789") for palabra in lista if palabra.isalpha()])
 del_http    = del_num.apply(lambda lista: [palabra for palabra in lista if palabra != "http"])
-del_sw      = del_http.apply(lambda lista: [palabra for palabra in lista if palabra not in spanish_sw])
-join_list   = del_sw.apply(lambda x: " ".join(x) if len(x) > 3 else "")
+join_list   = del_http.apply(lambda x: " ".join(x) if len(x) > 3 else "")
 
 programas["programa"] = join_list
 programas.drop(columns = "description", inplace = True)
 programas = programas.query("programa != ''")
 
-programas.to_json("outputs/programas_clean.json", orient = "table", index = False, force_ascii = True)
+programas.to_json("outputs/programas_clean.json", orient = "table", index = False)
