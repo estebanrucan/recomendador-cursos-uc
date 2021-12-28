@@ -1,9 +1,11 @@
 # DEPENDENCIES
 
 import streamlit as st
+
 import numpy as np
 import pandas as pd
-import gensim
+import torch
+from sentence_transformers import SentenceTransformer, util
 import json
 import codecs
 import plotly.express as px
@@ -14,26 +16,25 @@ try:
 except LookupError:
     nltk.download('punkt')
 
-# LOADS
+# Utils
 
-## Menus
-
-with codecs.open("scraper_siglas-uc/outputs/menus.json", "rU", encoding = "utf-8") as archivo:
-    menus = json.load(archivo)
-
-## Data
-
-data     = pd.read_json("scraper_siglas-uc/outputs/programas_clean.json", orient = "table")
-detalles = pd.read_json("scraper_siglas-uc/outputs/detalles_sp.json", orient = "table")
-
-## Model
-
-model       = gensim.models.LsiModel.load("modelo/files/model.model")
-index       = gensim.similarities.MatrixSimilarity.load("modelo/files/index.index")
-diccionario = gensim.corpora.Dictionary.load("modelo/files/diccionario.dict")
-stopwords   = pd.read_pickle("modelo/files/stopwords.pkl")
 tilde, sint = 'áéíóúÁÉÍÓÚ','aeiouAEIOU'
 trans       = str.maketrans(tilde, sint)
+
+# LOADS
+
+@st.cache(allow_output_mutation=True)
+def data():
+    with codecs.open("../scraper_siglas-uc/outputs/menus.json", "rU", encoding = "utf-8") as archivo:
+        menus = json.load(archivo)
+
+    model    = SentenceTransformer("modelo/files/bert_model")
+    embds    = torch.load("modelo/files/bert_de.tensor")
+    data     = pd.read_json("scraper_siglas-uc/outputs/programas_clean.json", orient = "table")
+    detalles = pd.read_json("scraper_siglas-uc/outputs/detalles_sp.json", orient = "table")
+    return model, embds, data, detalles, menus
+
+bert_model, documment_embs, data, detalles, menus = data()
 
 # MAIN TITLE
 
@@ -42,7 +43,9 @@ st.title("Recomendador de Cursos UC")
 st.markdown("""
 *Hecho por Esteban Rucán*.
 
-Esta aplicación entrega recomendaciones en base a la similitud de la consulta ingresada y los programas disponibles en el [Catálogo UC](https://catalogo.uc.cl/). Actualizado al Primer Semestre de 2022.
+Esta aplicación entrega recomendaciones en base a la similitud de la consulta ingresada y los programas disponibles en el [Catálogo UC](https://catalogo.uc.cl/). 
+
+**Actualizado al Primer Semestre de 2022**.
 """)
 
 # SIDERBAR
@@ -56,11 +59,10 @@ st.sidebar.markdown("## Consulta")
 consulta = st.sidebar.text_area(label = "", placeholder = "Por ejemplo: Portafolios de inversión")
 consulta = consulta.translate(trans)
 consulta = nltk.word_tokenize(consulta)
-consulta = [palabra.lower() for palabra in consulta if palabra.isalpha()]
-consulta = [palabra for palabra in consulta if palabra not in stopwords]
+consulta = " ".join([palabra.lower() for palabra in consulta if palabra.isalpha()])
 
-consulta_bow   = diccionario.doc2bow(consulta)
-data["score"]  = index[model[consulta_bow]]
+consulta_embs = bert_model.encode(consulta)
+data["score"] = util.cos_sim(consulta_embs, documment_embs)[0]
 datos_consulta = detalles.\
     merge(data, how = "right", on = ["escuela", "sigla"]).\
     sort_values("score", ascending = False).\
