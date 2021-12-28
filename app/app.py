@@ -18,20 +18,20 @@ except LookupError:
 
 ## Menus
 
-with codecs.open("../scraper_siglas-uc/outputs/menus.json", "rU", encoding = "utf-8") as archivo:
+with codecs.open("scraper_siglas-uc/outputs/menus.json", "rU", encoding = "utf-8") as archivo:
     menus = json.load(archivo)
 
 ## Data
 
-data     = pd.read_json("../scraper_siglas-uc/outputs/programas_clean.json", orient = "table")
-detalles = pd.read_json("../scraper_siglas-uc/outputs/detalles_sp.json", orient = "table")
+data     = pd.read_json("scraper_siglas-uc/outputs/programas_clean.json", orient = "table")
+detalles = pd.read_json("scraper_siglas-uc/outputs/detalles_sp.json", orient = "table")
 
 ## Model
 
-model       = gensim.models.LsiModel.load("../modelo/files/model.model")
-index       = gensim.similarities.MatrixSimilarity.load("../modelo/files/index.index")
-diccionario = gensim.corpora.Dictionary.load("../modelo/files/diccionario.dict")
-stopwords   = pd.read_pickle("../modelo/files/stopwords.pkl")
+model       = gensim.models.LsiModel.load("modelo/files/model.model")
+index       = gensim.similarities.MatrixSimilarity.load("modelo/files/index.index")
+diccionario = gensim.corpora.Dictionary.load("modelo/files/diccionario.dict")
+stopwords   = pd.read_pickle("modelo/files/stopwords.pkl")
 tilde, sint = 'áéíóúÁÉÍÓÚ','aeiouAEIOU'
 trans       = str.maketrans(tilde, sint)
 
@@ -103,7 +103,7 @@ if len(consulta) == 0:
     """)
 elif data_show["Similitud"].unique().shape[0] == 1:
     st.markdown("""
-    No hay recomendaciones para mostrar.
+    No hay recomendaciones para mostrar. Intenta con una nueva consulta o utiliza sinónimos.
     """)
 else:
     if len(escuelas) == 0:
