@@ -1,6 +1,5 @@
 # DEPENDENCIES
 
-
 import streamlit as st
 import numpy as np
 import pandas as pd
@@ -77,7 +76,7 @@ datos_consulta = detalles.\
         "creditos": "Créditos"
     }, axis = 1).\
     iloc[:, [0, 4, 5, 1, 2, 3, 6]].\
-    assign(pos = np.arange(1, 1080, 1)).\
+    assign(pos = np.arange(1, 3229, 1)).\
     set_index("pos")
 
 ## Filtros
@@ -104,7 +103,7 @@ if len(consulta) == 0:
     """)
 elif data_show["Similitud"].unique().shape[0] == 1:
     st.markdown("""
-    No hay recomendaciones para mostrar.
+    No hay recomendaciones para mostrar. Intenta con una nueva consulta o utiliza sinónimos.
     """)
 else:
     if len(escuelas) == 0:

@@ -6,7 +6,7 @@ import gensim
 import pickle
 
 sw = nltk.corpus.stopwords.words("spanish")
-with open("modelo/files/stopwords.pkl", "wb") as file:
+with open("files/stopwords.pkl", "wb") as file:
     pickle.dump(sw, file)
 
 detalles = pd.read_json("scraper_siglas-uc/outputs/detalles.json")
