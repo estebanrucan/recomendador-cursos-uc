@@ -23,6 +23,9 @@ trans       = str.maketrans(tilde, sint)
 
 # LOADS
 
+base_url = lambda ID: f"https://catalogo.uc.cl/index.php?tmpl=component&option=com_catalogo&view=programa&sigla={ID}"
+
+
 @st.cache(allow_output_mutation=True)
 def data():
     with codecs.open("scraper_siglas-uc/outputs/menus.json", "rU", encoding = "utf-8") as archivo:
@@ -123,7 +126,10 @@ else:
     else:
         data_show = data_show.query("Formato in @formatos")
 
-    st.dataframe(data_show)
+    data_show["url"] = data_show["Sigla"].apply(lambda x: f"<a href={base_url(x)} target=\"_blank\">")
+    data_show["Nombre"] = data_show["url"] + data_show["Nombre"].apply(lambda x: f"{x}</a>")
+    data_show.drop(columns = "url", inplace = True)
+    st.write(data_show.to_html(escape=False, index=False), unsafe_allow_html=True)
 
 ## Visualizaciones
 
