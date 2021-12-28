@@ -12,6 +12,8 @@ autopep8 = "*"
 nltk = "*"
 seaborn = "*"
 plotly = "*"
+sentence-transformers = "*"
+scrapy = "*"
 
 [dev-packages]
 

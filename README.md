@@ -1,5 +1,3 @@
-
-
 # Recomendador de Cursos UC
 
 <p align="center">
