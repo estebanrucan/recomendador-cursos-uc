@@ -56,22 +56,10 @@ class CatalogoUcSpider(scrapy.Spider):
     def parse_programa(self, response, **kwargs):
         sigla       = kwargs["sigla"]
         escuela     = kwargs["escuela"]
-        description = response.xpath("//pre/text()").extract_first()
+        description = ' '.join(response.xpath("//pre/text()").extract())
 
         yield {
             "escuela"    : escuela,
             "sigla"      : sigla,
             "description": description
         }
-
-
-
-    
-        
-
-
-
-
-
-
-
