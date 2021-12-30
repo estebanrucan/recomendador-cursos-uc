@@ -2,7 +2,7 @@ import json
 import codecs
 import pandas as pd
 
-prog = pd.read_json("outputs/detalles.json")
+prog = pd.read_json("scraper_siglas-uc/outputs/detalles.json")
 
 escuelas = [e for e in prog.escuela.unique()]
 campus   = [e for e in prog.campus.unique()]

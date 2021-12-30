@@ -12,26 +12,15 @@
 
 ## Descripción
 
-Recomendador realizado para que los estudiantes tengan acceso a recomendaciones en base a los programas de los cursos de la Pontificia Universidad Católica de Chile.
+Esta aplicación entrega recomendaciones en base a la similitud de la consulta ingresada y los programas disponibles en el [Catálogo UC](https://catalogo.uc.cl/).
 
-## Comenzando 🚀
+## App en funcionamiento
 
 Visita la app desde este [link](https://share.streamlit.io/estebanrucan/recomendador-cursos-uc/main/app/app.py).
 
 ### Pre-requisitos 📋
 
-```
-scrapy==2.4.1
-selenium==3.141.0
-nltk==3.6.6
-sentence_transformers==2.1.0
-torch==1.10.1
-pandas==1.3.5
-numpy==1.21.5
-streamlit==1.3.0
-plotly==5.5.0
-python==3.8
-```
+Ver los pre-requisitos en el archivo [requirements.txt](./requirements.txt)
 
 ## Construido con 🛠️
 

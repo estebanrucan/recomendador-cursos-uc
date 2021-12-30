@@ -7,7 +7,7 @@ from time import sleep
 
 # Import keys
 
-with codecs.open("files/docs.json", "rU", "utf-8") as js:
+with codecs.open("scraper_siglas-uc/files/docs.json", "rU", "utf-8") as js:
     data = json.load(js)[0]
 
 # Url generator
@@ -19,7 +19,7 @@ base_url = lambda ID: f"https://buscacursos.uc.cl/?cxml_semestre=2022-1&cxml_sig
 
 options = webdriver.ChromeOptions()
 options.add_argument("--incognito")
-driver = webdriver.Chrome(executable_path="webdriver/chromedriver.exe", options=options)
+driver = webdriver.Chrome(executable_path="scraper_siglas-uc/webdriver/chromedriver.exe", options=options)
 
 # Scrape siglas
 
@@ -41,5 +41,5 @@ driver.close()
 
 # Save resuls
 
-with codecs.open("outputs/siglas.json", "w", "utf-8") as js:
+with codecs.open("scraper_siglas-uc/outputs/siglas.json", "w", "utf-8") as js:
     json.dump(lista_siglas, js)
