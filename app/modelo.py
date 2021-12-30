@@ -17,9 +17,11 @@ class Modelo:
 
         # Load stopwords
         try:
-            nltk.data.find('tokenizers/punkt')
+            nltk.data.find("tokenizers/punkt")
+            nltk.data.find("corpora/stopwords")
         except LookupError:
-            nltk.download('punkt')
+            nltk.download("punkt")
+            nltk.download('stopwords')
         finally:
             self.stop_words = nltk.corpus.stopwords.words("spanish")
 
