@@ -25,7 +25,6 @@ class Modelo:
         finally:
             self.stop_words = nltk.corpus.stopwords.words("spanish")
 
-
     def __limpiar_consulta(self, consulta):
         consulta = consulta.translate(self.trans)
         consulta = nltk.word_tokenize(consulta)
