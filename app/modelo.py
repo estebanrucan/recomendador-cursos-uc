@@ -1,19 +1,21 @@
 import numpy as np
-from sentence_transformers import SentenceTransformer, util
-import torch
+import gensim
 import nltk
+import os
 
 class Modelo:
     
     def __init__(self):
-        self.ruta_modelo  = "bert-base-nli-mean-tokens"
-        self.ruta_embs    = "modelo/files/bert_de.tensor"
+        self.ruta_modelo  = os.path.join("modelo", "outputs", "model.model")
+        self.ruta_index   = os.path.join("modelo", "outputs", "index.index")
+        self.ruta_diccio  = os.path.join("modelo", "outputs", "diccionario.dict")
         self.trans        = str.maketrans('áéíóúÁÉÍÓÚ','aeiouAEIOU')
 
     def cargar(self):
         # Load the model
-        self.modelo = SentenceTransformer(self.ruta_modelo)
-        self.embds  = torch.load(self.ruta_embs)
+        self.modelo      = gensim.models.LsiModel.load(self.ruta_modelo)
+        self.index       = gensim.similarities.MatrixSimilarity.load(self.ruta_index)
+        self.diccionario = gensim.corpora.Dictionary.load(self.ruta_diccio)
 
         # Load stopwords
         try:
@@ -30,12 +32,12 @@ class Modelo:
         consulta = nltk.word_tokenize(consulta)
         consulta = [palabra.lower() for palabra in consulta if palabra.isalpha()]
         consulta = [palabra for palabra in consulta if palabra not in self.stop_words]
-        return " ".join(consulta)
+        return consulta
 
     def get_score(self, consulta, datos):
         consulta                 = self.__limpiar_consulta(consulta)
-        consulta_embs            = self.modelo.encode(consulta)
-        datos.programas["score"] = util.cos_sim(consulta_embs, self.embds)[0]
+        consulta_bow             = self.diccionario.doc2bow(consulta)
+        datos.programas["score"] = self.index[self.modelo[consulta_bow]]
 
         self.datos_modelo = datos.detalles.\
             merge(datos.programas, how = "right", on = ["escuela", "sigla"]).\

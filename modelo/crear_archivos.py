@@ -1,11 +1,17 @@
-from sentence_transformers import SentenceTransformer
+import os
 import pandas as pd
-import torch
+from nltk import word_tokenize
+import gensim
 
-programas = pd.read_json("scraper_siglas-uc/outputs/programas_clean.json", orient="table")
-corpus = programas["programa"].to_list()
+data = pd.read_json(os.path.join("scraper_siglas-uc", "outputs", "programas_clean.json"), orient="table")
 
-bert_model = SentenceTransformer("bert-base-nli-mean-tokens")
-documment_embs = bert_model.encode(corpus, show_progress_bar=True, convert_to_tensor=True)
+programas   = data["programa"].apply(lambda x: word_tokenize(x)).to_list()
+diccionario = gensim.corpora.Dictionary(programas)
+corpus      = [diccionario.doc2bow(programa) for programa in programas]
+model       = gensim.models.LsiModel(corpus, 500, diccionario)
+index       = gensim.similarities.MatrixSimilarity(model[corpus])
+data.drop(columns = "programa", inplace = True)
 
-torch.save(documment_embs, "modelo/files/bert_de.tensor")
+index.save(os.path.join("modelo", "outputs", "index.index"))
+diccionario.save(os.path.join("modelo", "outputs", "diccionario.dict"))
+model.save(os.path.join("modelo", "outputs", "model.model"))

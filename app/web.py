@@ -3,11 +3,12 @@ import codecs
 import numpy as np
 import plotly.express as px
 import streamlit as st
+import os
 
 class Web:
 
     def __init__(self):
-        self.ruta_menus = "scraper_siglas-uc/outputs/menus.json"
+        self.ruta_menus = os.path.join("scraper_siglas-uc", "outputs", "menus.json")
         self.min_rec    = 4
         self.max_rec    = 30
         self.step_rec   = 2
@@ -17,7 +18,7 @@ class Web:
         self.sel_escuelas = list()
         self.sel_campus   = list()
         self.sel_formatos = list()
-        self.sel_recomend = 8
+        self.sel_recomend = 10
 
     def cargar(self):
         with codecs.open(self.ruta_menus, "rU", encoding = "utf-8") as archivo:
@@ -31,7 +32,7 @@ class Web:
         return f"https://catalogo.uc.cl/index.php?tmpl=component&option=com_catalogo&view=programa&sigla={sigla}"
 
     def __datos_a_html(self, datos):
-        datos["url"] = datos["Sigla"].apply(lambda x: f"<a href={self.base_url(x)} target=\"_blank\">")
+        datos["url"]    = datos["Sigla"].apply(lambda x: f"<a href={self.base_url(x)} target=\"_blank\">")
         datos["Nombre"] = datos["url"] + datos["Nombre"].apply(lambda x: f"{x}</a>")
         datos.drop(columns = "url", inplace = True)
         datos_html = datos.to_html(escape=False, index=False)
