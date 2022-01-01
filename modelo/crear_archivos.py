@@ -8,9 +8,8 @@ data = pd.read_json(os.path.join("scraper_siglas-uc", "outputs", "programas_clea
 programas   = data["programa"].apply(lambda x: word_tokenize(x)).to_list()
 diccionario = gensim.corpora.Dictionary(programas)
 corpus      = [diccionario.doc2bow(programa) for programa in programas]
-model       = gensim.models.LsiModel(corpus, 500, diccionario)
+model       = gensim.models.LsiModel(corpus, 203, diccionario)
 index       = gensim.similarities.MatrixSimilarity(model[corpus])
-data.drop(columns = "programa", inplace = True)
 
 index.save(os.path.join("modelo", "outputs", "index.index"))
 diccionario.save(os.path.join("modelo", "outputs", "diccionario.dict"))
