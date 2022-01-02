@@ -35,20 +35,31 @@ for esc, num in data.items():
     if len(siglas) > 0:
 
         formatos   = driver.find_elements_by_xpath("//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[8]")[1:]
+        secciones  = driver.find_elements_by_xpath("//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[5]")[1:]
         nombres    = driver.find_elements_by_xpath("//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[10]")[1:]
-        profesores = driver.find_elements_by_xpath("//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[11]/a[1]")
+        profesores = driver.find_elements_by_xpath("//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[11]/descendant-or-self::*[1]")[1:]
         campus     = driver.find_elements_by_xpath("//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[12]")[1:]
         creditos   = driver.find_elements_by_xpath("//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[13]")[1:]
 
         siglas     = [sigla.text for sigla in siglas]
         formatos   = [formato.text for formato in formatos]
+        secciones  = [int(seccion.text) for seccion in secciones]
         nombres    = [nombre.text for nombre in nombres]
         profesores = [profesor.text for profesor in profesores]
         campus     = [c.text for c in campus]
         escuelas   = [esc for i in range(len(siglas))]
         creditos   = [int(cred.text) for cred in creditos]
         
-        lista_detalles += [{"escuela": escu, "campus": camp, "formato": formato, "sigla": sigla, "nombre": nombre, "creditos": cred, "docente": prof} for escu, camp, formato, sigla, nombre, cred, prof in zip(escuelas, campus, formatos, siglas, nombres, creditos, profesores)]
+        lista_detalles += [{
+            "escuela" : escu,
+            "campus"  : camp,
+            "formato" : formato,
+            "sigla"   : sigla,
+            "nombre"  : nombre,
+            "seccion" : seccion,
+            "creditos": cred,
+            "docente" : prof
+        } for escu, camp, formato, sigla, nombre, seccion, cred, prof in zip(escuelas, campus, formatos, siglas, nombres, secciones, creditos, profesores)]
 
         print(lista_detalles[-len(siglas):])
 

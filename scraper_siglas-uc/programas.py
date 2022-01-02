@@ -7,7 +7,7 @@ trans = str.maketrans(tilde, sint)
 
 spanish_sw = stopwords.words("spanish")
 
-programas = pd.read_csv("scrapercatalogouc/outputs/programas.csv").query("description != 'Programa de curso no disponible'")
+programas = pd.read_csv("scrapercatalogouc/outputs/programas.csv")
 programas["description"] = programas["description"].str.replace("En este curso nos comprometemos con la Integridad Académica, reconociéndola como pilar fundamental del proceso formativo de nuestros estudiantes, para colaborar en la construcción de una cultura de respeto e integridad en la UC. Por tanto, las estrategias metodológicas y de evaluación, debiesen favorecer la promoción de los valores de honestidad, confianza, justicia, respeto y responsabilidad, así como el desarrollo de habilidades transversales para el aprendizaje.\nAdemás, para fortalecer esta cultura de respeto e integridad, este curso se adscribe y compromete con el Código de Honor UC:\n\nComo miembro de la comunidad de la Pontificia Universidad Católica de Chile, me comprometo a respetar los principios y normativas que la rigen. Asimismo, me comprometo a actuar con rectitud y honestidad en las relaciones con los demás integrantes de la comunidad y en la realización de todo trabajo, particularmente en aquellas actividades vinculadas a la docencia, al aprendizaje y la creación, difusión y transferencia del conocimiento. Además, me comprometo a velar por la dignidad e integridad de las personas, evitando incurrir en y, rechazando, toda conducta abusiva de carácter físico, verbal, psicológico y de violencia sexual. Del mismo modo, asumo el compromiso de cuidar los bienes de la Universidad", "")
 
 del_tilde   = programas["description"].str.translate(trans)

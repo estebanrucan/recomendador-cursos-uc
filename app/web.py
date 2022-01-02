@@ -2,6 +2,7 @@ import json
 import codecs
 import numpy as np
 import plotly.express as px
+import plotly.graph_objects as go
 import streamlit as st
 import os
 
@@ -35,8 +36,15 @@ class Web:
         datos["url"]    = datos["Sigla"].apply(lambda x: f"<a href={self.base_url(x)} target=\"_blank\">")
         datos["Nombre"] = datos["url"] + datos["Nombre"].apply(lambda x: f"{x}</a>")
         datos.drop(columns = "url", inplace = True)
-        datos_html = datos.to_html(escape=False, index=False)
-        return datos_html
+        fig = go.Figure(
+            data = [go.Table(
+                header = dict(values = list(datos.columns)),
+                cells = dict(
+                    values = [datos["Similitud"], datos["Sigla"], datos["Nombre"], datos["Escuela"], datos["Campus"], datos["Formato"], datos["Créditos"]]
+                )
+            )]
+        )
+        return fig
 
     def __crear_grafico(self, datos):
         data_media = datos.\
@@ -52,7 +60,7 @@ class Web:
         return fig
 
     def mostrar_objeto(self, modelo, tipo = "datos"):
-        data_show = modelo.datos_modelo.iloc[:self.sel_recomend, :]
+        data_show = modelo.datos_modelo.copy()
 
         if len(self.consulta) == 0:
             st.markdown(f"""
@@ -72,7 +80,7 @@ class Web:
                     data_show = data_show.query("Formato in @self.sel_formatos")
                 data_show["Similitud"] = np.round(data_show["Similitud"], 1).astype(str) + "%"
                 data_show = self.__datos_a_html(data_show)
-                return st.write(data_show, unsafe_allow_html=True)
+                return st.plotly_chart(data_show.iloc[:self.sel_recomend, :])
             else:
                 fig = self.__crear_grafico(data_show)
                 return st.plotly_chart(fig)

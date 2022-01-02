@@ -4,6 +4,7 @@ from selenium import webdriver
 import json
 import codecs
 from time import sleep
+import os
 
 # Import keys
 
@@ -19,7 +20,7 @@ base_url = lambda ID: f"https://buscacursos.uc.cl/?cxml_semestre=2022-1&cxml_sig
 
 options = webdriver.ChromeOptions()
 options.add_argument("--incognito")
-driver = webdriver.Chrome(executable_path="scraper_siglas-uc/webdriver/chromedriver.exe", options=options)
+driver = webdriver.Chrome(executable_path=os.path.join("scraper_siglas-uc", "webdriver", "chromedriver.exe"), options=options)
 
 # Scrape siglas
 
@@ -41,5 +42,5 @@ driver.close()
 
 # Save resuls
 
-with codecs.open("scraper_siglas-uc/outputs/siglas.json", "w", "utf-8") as js:
+with codecs.open(os.path.join("scraper_siglas-uc" ,"outputs", "siglas.json"), "w", "utf-8") as js:
     json.dump(lista_siglas, js)
