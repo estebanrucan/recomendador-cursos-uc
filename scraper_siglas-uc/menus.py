@@ -14,5 +14,5 @@ diccionario = {
     "formato" : formato
 }
 
-with codecs.open("outputs/menus.json", "w", "utf-8") as file:
+with codecs.open("scraper_siglas-uc/outputs/menus.json", "w", "utf-8") as file:
     json.dump(diccionario, file)

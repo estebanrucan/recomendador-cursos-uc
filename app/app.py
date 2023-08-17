@@ -42,7 +42,7 @@ web.sel_recomend = st.sidebar.slider("Top Recomendaciones", web.min_rec, web.max
 st.title("Recomendador de Cursos UC")
 
 st.markdown("""
-*Actualizado al Primer Semestre de 2022. Hecho por Esteban Rucán.*
+*Actualizado al Primer Semestre de 2023. Hecho por Esteban Rucán.*
 
 Esta aplicación entrega recomendaciones en base a la similitud de la consulta ingresada y los programas disponibles en el [Catálogo UC](https://catalogo.uc.cl/).
 """)

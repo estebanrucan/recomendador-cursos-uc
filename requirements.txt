@@ -6,7 +6,6 @@ async-generator==1.10
 attrs==21.4.0
 Automat==20.2.0
 backcall==0.2.0
-backports.zoneinfo==0.2.1
 base58==2.1.1
 bleach==4.1.0
 blinker==1.4
@@ -25,7 +24,7 @@ decorator==5.1.0
 defusedxml==0.7.1
 entrypoints==0.3
 filelock==3.4.2
-gensim==4.1.2
+gensim
 gitdb==4.0.9
 GitPython==3.1.24
 h11==0.12.0
@@ -62,7 +61,7 @@ nbformat==5.1.3
 nest-asyncio==1.5.4
 nltk==3.6.7
 notebook==6.4.6
-numpy==1.21.5
+numpy
 outcome==1.1.0
 packaging==21.3
 pandas==1.3.5
@@ -99,8 +98,8 @@ requests==2.26.0
 sacremoses==0.0.46
 scikit-learn==1.0.2
 scipy==1.7.3
-Scrapy==2.5.1
-selenium==4.1.0
+Scrapy
+selenium
 Send2Trash==1.8.0
 sentencepiece==0.1.96
 service-identity==21.1.0
@@ -114,7 +113,6 @@ tenacity==8.0.1
 terminado==0.12.1
 testpath==0.5.0
 threadpoolctl==3.0.0
-tokenizers==0.10.3
 toml==0.10.2
 toolz==0.11.2
 tornado==6.1

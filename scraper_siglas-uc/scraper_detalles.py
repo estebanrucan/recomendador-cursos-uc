@@ -1,5 +1,6 @@
 # Libraries
 
+from selenium.webdriver.common.by import By
 from selenium import webdriver
 import json
 import codecs
@@ -12,14 +13,14 @@ with codecs.open("scraper_siglas-uc/files/docs.json", "rU", "utf-8") as js:
 
 # Url generator
 
-base_url = lambda ID: f"https://buscacursos.uc.cl/?cxml_semestre=2022-1&cxml_sigla=&cxml_nrc=&cxml_nombre=&cxml_categoria=TODOS&cxml_area_fg=TODOS&cxml_formato_cur=TODOS&cxml_profesor=&cxml_campus=TODOS&cxml_unidad_academica={ID}&cxml_horario_tipo_busqueda=si_tenga&cxml_horario_tipo_busqueda_actividad=TODOS#resultados"
+base_url = lambda ID: f"https://buscacursos.uc.cl/?cxml_semestre=2023-1&cxml_sigla=&cxml_nrc=&cxml_nombre=&cxml_categoria=TODOS&cxml_area_fg=TODOS&cxml_formato_cur=TODOS&cxml_profesor=&cxml_campus=TODOS&cxml_unidad_academica={ID}&cxml_horario_tipo_busqueda=si_tenga&cxml_horario_tipo_busqueda_actividad=TODOS#resultados"
 
 
 # Init webdriver
 
 options = webdriver.ChromeOptions()
 options.add_argument("--incognito")
-driver = webdriver.Chrome(executable_path="scraper_siglas-uc/webdriver/chromedriver.exe", options=options)
+driver = webdriver.Chrome(options=options)
 
 # Scrape siglas
 
@@ -30,15 +31,15 @@ for esc, num in data.items():
     driver.get(base_url(num))
     sleep(5)
 
-    siglas = driver.find_elements_by_xpath("//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[2]/div")
+    siglas = driver.find_elements(By.XPATH, "//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[2]/div")
 
     if len(siglas) > 0:
 
-        formatos   = driver.find_elements_by_xpath("//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[8]")[1:]
-        nombres    = driver.find_elements_by_xpath("//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[10]")[1:]
-        profesores = driver.find_elements_by_xpath("//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[11]/a[1]")
-        campus     = driver.find_elements_by_xpath("//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[12]")[1:]
-        creditos   = driver.find_elements_by_xpath("//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[13]")[1:]
+        formatos   = driver.find_elements(By.XPATH, "//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[8]")[1:]
+        nombres    = driver.find_elements(By.XPATH, "//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[10]")[1:]
+        profesores = driver.find_elements(By.XPATH, "//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[11]/a[1]")
+        campus     = driver.find_elements(By.XPATH, "//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[12]")[1:]
+        creditos   = driver.find_elements(By.XPATH, "//*[@id='wrapper']/div/div/div[3]/table/tbody/tr/td[13]")[1:]
 
         siglas     = [sigla.text for sigla in siglas]
         formatos   = [formato.text for formato in formatos]

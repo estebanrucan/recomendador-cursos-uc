@@ -54,5 +54,5 @@ class Modelo:
                 "creditos": "Créditos"
             }, axis = 1).\
             iloc[:, [0, 4, 5, 1, 2, 3, 6]].\
-            assign(pos = np.arange(1, 3229)).\
+            assign(pos = np.arange(1, 3157)).\
             set_index("pos")

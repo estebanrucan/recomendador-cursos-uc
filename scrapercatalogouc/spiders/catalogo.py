@@ -2,7 +2,7 @@ import scrapy
 import codecs
 import json
 
-with codecs.open("../scraper_siglas-uc/outputs/siglas.json", "rU", encoding="utf-8") as js:
+with codecs.open("./scraper_siglas-uc/outputs/siglas.json", "rU", encoding="utf-8") as js:
     data = json.load(js)
 
 siglas = list()
@@ -18,7 +18,7 @@ class CatalogoUcSpider(scrapy.Spider):
     ]
     custom_settings = {
         'FEEDS': {
-            'outputs/programas.json': {
+            'scraper_siglas-uc/outputs/programas.json': {
                 'format'            : 'json',
                 'encoding'          : 'utf-8',
                 'store_empty'       : False,
@@ -28,7 +28,7 @@ class CatalogoUcSpider(scrapy.Spider):
                     'export_empty_fields': True,
                 },
             },
-            'outputs/programas.csv': {
+            'scraper_siglas-uc/outputs/programas.csv': {
                 'format'            : 'csv',
                 'encoding'          : 'utf-8',
                 'store_empty'       : False,
